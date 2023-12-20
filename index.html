@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      background: blue;
+    }
+    button {
+      cursor: pointer;
+      width: 5%;
+      height: 30px;
+      margin-top: 10px;
+    }
+    textarea {
+      margin-top: 50px;
+    }
+    input {
+      width: 300px;
+      height: 50px;
+    }
+  </style>
+  <body>
+    <input id="n" type="number" />
+    <button onclick="change()">OK</button> <br />
+    <textarea id="yazi" cols="40" rows="15"></textarea>
+    <button id="btn" onclick="btn()">Seslendir</button>
+
+    <script>
+      let n = document.getElementById("n");
+      let y = document.getElementById("yazi");
+      let btn = document.getElementById("btn");
+
+      function change() {
+        if (n.value < 10) {
+          y.innerHTML = bir(n.value);
+        } else if (n.value < 100) {
+          let qaliq = n.value % 10;
+          let c = ~~(n.value / 10);
+          y.innerHTML = ` ${onluq(c)}   ${bir(qaliq)}`;
+        } else if (n.value < 1000) {
+          let qaliq = n.value % 10;
+          let c = ((n.value - qaliq) / 10) % 10;
+          let d = ~~(n.value / 100);
+
+          y.innerHTML = `${yuzluk(d)}  ${onluq(c)}   ${bir(qaliq)}`;
+        } else if (n.value < 10000) {
+          let qaliq = n.value % 10;
+          let c = ((n.value - qaliq) / 10) % 10;
+          let d = ((n.value - c * 10 - qaliq) / 100) % 10;
+          let m = ~~(n.value / 1000);
+
+          y.innerHTML = `${minlik(m)} ${yuzluk(d)}  ${onluq(c)}   ${bir(
+            qaliq
+          )}`;
+        } else if (n.value < 100000) {
+          let qaliq = n.value % 10;
+          let c = ((n.value - qaliq) / 10) % 10;
+          let d = ((n.value - c * 10 - qaliq) / 100) % 10;
+          let m = ((n.value - d * 100 - c * 10 - qaliq) / 1000) % 10;
+          let om = ~~(n.value / 10000);
+          y.innerHTML = `${onminlik(om)} ${minlik(m)} ${yuzluk(d)}  ${onluq(
+            c
+          )}   ${bir(qaliq)}`;
+        } else if (n.value < 1000000) {
+          let qaliq = n.value % 10;
+          let c = ((n.value - qaliq) / 10) % 10;
+          let d = ((n.value - c * 10 - qaliq) / 100) % 10;
+          let m = ((n.value - d * 100 - c * 10 - qaliq) / 1000) % 10;
+          let om =
+            ((n.value - m * 1000 - d * 100 - c * 10 - qaliq) / 10000) % 10;
+          let ym = ~~(n.value / 100000);
+          y.innerHTML = ` ${yuzminlik(ym)}  ${onminlik(om)} ${minlik(
+            m
+          )} ${yuzluk(d)}  ${onluq(c)}   ${bir(qaliq)}`;
+        } else if (n.value < 10000000) {
+          let qaliq = n.value % 10;
+          let c = ((n.value - qaliq) / 10) % 10;
+          let d = ((n.value - c * 10 - qaliq) / 100) % 10;
+          let m = ((n.value - d * 100 - c * 10 - qaliq) / 1000) % 10;
+          let om =
+            ((n.value - m * 1000 - d * 100 - c * 10 - qaliq) / 10000) % 10;
+          let ym =
+            ((n.value - om * 10000 - m * 1000 - d * 100 - c * 10 - qaliq) /
+              100000) %
+            10;
+          let ml = ~~(n.value / 1000000);
+          y.innerHTML = ` ${milyon(ml)} ${yuzminlik(ym)}  ${onminlik(
+            om
+          )} ${minlik(m)} ${yuzluk(d)}  ${onluq(c)}   ${bir(qaliq)}`;
+        }
+      }
+
+      function bir(x) {
+        let text =
+          x == 1
+            ? "bir"
+            : x == 2
+            ? "iki"
+            : x == 3
+            ? "üç"
+            : x == 4
+            ? "dörd"
+            : x == 5
+            ? "beş"
+            : x == 6
+            ? "alti"
+            : x == 7
+            ? "yeddi"
+            : x == 8
+            ? "sekkiz"
+            : x == 9
+            ? "doqquz"
+            : "";
+
+        return text;
+      }
+
+      function onluq(x) {
+        let text =
+          x == 1
+            ? "on"
+            : x == 2
+            ? "iyirmi"
+            : x == 3
+            ? "otuz"
+            : x == 4
+            ? "qirx"
+            : x == 5
+            ? "elli"
+            : x == 6
+            ? "altmiş"
+            : x == 7
+            ? "yetmiş"
+            : x == 8
+            ? "seksen"
+            : x == 9
+            ? "doxsan"
+            : "";
+
+        return text;
+      }
+      function yuzluk(x) {
+        let text =
+          x == 1
+            ? "yuz"
+            : x == 2
+            ? "ikiyuz"
+            : x == 3
+            ? "ucyuz"
+            : x == 4
+            ? "dordyuz"
+            : x == 5
+            ? "besyuz"
+            : x == 6
+            ? "altiyuz"
+            : x == 7
+            ? "yeddiyuz"
+            : x == 8
+            ? "sekkizyuz"
+            : x == 9
+            ? "doqquzyuz"
+            : "";
+
+        return text;
+      }
+      function minlik(x) {
+        let text =
+          x == 1
+            ? "min"
+            : x == 2
+            ? "ikimin"
+            : x == 3
+            ? "ucmin"
+            : x == 4
+            ? "dordmin"
+            : x == 5
+            ? "besmin"
+            : x == 6
+            ? "altimin"
+            : x == 7
+            ? "yeddimin"
+            : x == 8
+            ? "sekkizmin"
+            : x == 9
+            ? "doqquzmin"
+            : "";
+
+        return text;
+      }
+      function onminlik(x) {
+        let text =
+          x == 1
+            ? "on"
+            : x == 2
+            ? "iyirmi"
+            : x == 3
+            ? "otuz"
+            : x == 4
+            ? "qirx"
+            : x == 5
+            ? "elli"
+            : x == 6
+            ? "altmis"
+            : x == 7
+            ? "yetmis"
+            : x == 8
+            ? "seksen"
+            : x == 9
+            ? "doxsan"
+            : "";
+
+        return text;
+      }
+
+      function yuzminlik(x) {
+        let text =
+          x == 1
+            ? "yuz"
+            : x == 2
+            ? "ikiyuz"
+            : x == 3
+            ? "ucyuz"
+            : x == 4
+            ? "dordyuz"
+            : x == 5
+            ? "besyuz"
+            : x == 6
+            ? "altiyuz"
+            : x == 7
+            ? "yeddiyuz"
+            : x == 8
+            ? "sekkizyuz"
+            : x == 9
+            ? "doqquzyuz"
+            : "";
+
+        return text;
+      }
+      function milyon(x) {
+        let text =
+          x == 1
+            ? "1 milyon"
+            : x == 2
+            ? "2 milyon"
+            : x == 3
+            ? "3 milyon"
+            : x == 4
+            ? "4 milyon"
+            : x == 5
+            ? "5 milyon"
+            : x == 6
+            ? "6 milyon"
+            : x == 7
+            ? "7 milyon"
+            : x == 8
+            ? "8 milyon"
+            : x == 9
+            ? "9 milyon"
+            : "";
+
+        return text;
+      }
+
+      btn.addEventListener("click", () => {
+        let talk = new SpeechSynthesisUtterance(y.value);
+        speechSynthesis.speak(talk);
+      });
+    </script>
+  </body>
+</html>
